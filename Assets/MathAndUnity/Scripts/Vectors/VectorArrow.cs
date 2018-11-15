@@ -22,7 +22,8 @@ public class VectorArrow : MonoBehaviour
 	private void UpdateVector()
 	{
 		if(_Line == null || _Cup == null) return;
-		_Line.startColor = _Line.endColor = _Cup.startColor = _Cup.endColor = _Color;
+		
+		SetColor(_Color);
 		_Line.positionCount = _Cup.positionCount = 2;
 		_Line.SetPosition(0, _VectorStart);
 		_Line.SetPosition(1, _VectorEnd - (_VectorEnd - _VectorStart).normalized * _CupLength);
@@ -34,6 +35,7 @@ public class VectorArrow : MonoBehaviour
 		{
 			var dv = _VectorEnd - _VectorStart;
 			var normal = new Vector3(-dv.y, dv.x).normalized;
+			normal = normal.y > 0 ? normal : -normal;
 			_Label.transform.localPosition 
 				= (_VectorEnd + _VectorStart) / 2
 				  + normal * TextOffsetY;
@@ -52,5 +54,11 @@ public class VectorArrow : MonoBehaviour
 	public void SetLabel(string label)
 	{
 		_Label.text = label;
+	}
+
+	public void SetColor(Color color)
+	{
+		_Color = color;
+		_Line.startColor = _Line.endColor = _Cup.startColor = _Cup.endColor = _Color;
 	}
 }

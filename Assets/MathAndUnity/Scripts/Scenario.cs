@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class Scenario : MonoBehaviour
 {
-    public event Action OnEnd;
+    public const float AnimTime = 0.5f;
+    public Action OnEnd;
     public string Title;
     public string Description;
     public abstract void Show();

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VectorPlusBlock : VectorBlock
+public class VectorMinusBlock : VectorBlock
 {
+
 	[SerializeField] private VectorArrow _VectorA;
 	[SerializeField] private VectorArrow _VectorB;
 	[SerializeField] private VectorArrow _VectorResult;
@@ -15,7 +16,7 @@ public class VectorPlusBlock : VectorBlock
 	{
 		_VectorA.SetLabel("a");
 		_VectorB.SetLabel("b");
-		_VectorResult.SetLabel("a+b");
+		_VectorResult.SetLabel("a-b");
 		_VectorA.gameObject.SetActive(true);
 		_VectorB.gameObject.SetActive(false);
 		_VectorResult.gameObject.SetActive(false);
@@ -30,13 +31,16 @@ public class VectorPlusBlock : VectorBlock
 		_VectorB.gameObject.SetActive(true);
 		yield return UtilityCoroutines.LerpCoroutine(_VectorB, Vector3.zero, _VectorBPosition, Scenario.AnimTime);
 		yield return new WaitForSeconds(Scenario.AnimTime / 5);
-	
-		yield return UtilityCoroutines.LerpCoroutine(_VectorB.transform, Vector3.zero, _VectorAPosition,
-			Scenario.AnimTime);
+		yield return UtilityCoroutines.LerpCoroutine(_VectorB.transform, Vector3.zero, _VectorAPosition, Scenario.AnimTime);
+		yield return new WaitForSeconds(Scenario.AnimTime / 5);
+		_VectorB.SetLabel("-b");
+		_VectorB.SetColor(Color.red);
+		yield return UtilityCoroutines.LerpCoroutine(_VectorB, Vector3.zero, - _VectorBPosition, Scenario.AnimTime);
 		yield return new WaitForSeconds(Scenario.AnimTime / 5);
 		_VectorResult.gameObject.SetActive(true);
-		yield return UtilityCoroutines.LerpCoroutine(_VectorResult, Vector3.zero, _VectorAPosition + _VectorBPosition, 
+		yield return UtilityCoroutines.LerpCoroutine(_VectorResult, Vector3.zero, _VectorAPosition - _VectorBPosition, 
 			Scenario.AnimTime);
+		yield return new WaitForSeconds(Scenario.AnimTime / 5);
 		yield return new WaitForSeconds(Scenario.AnimTime);
 		onFinish?.Invoke();
 	}
