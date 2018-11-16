@@ -9,6 +9,8 @@ public class VectorАrithmetic : Scenario
     private int _CurrentBlock = 0;
     public override void Show()
     {
+        Debug.Log(_CurrentBlock);
+        _Blocks[_CurrentBlock].gameObject.SetActive(true);
         _Blocks[_CurrentBlock].Show(OnShowed);
     }
 

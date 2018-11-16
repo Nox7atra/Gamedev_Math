@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: 
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/MathAndUnity/Scenes/0 - VectorsExample.unity
+    guid: 41d2a747a426da74fa0cd5119de50c84
   m_configObjects: {}

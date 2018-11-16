@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Moments;
+using TMPro;
 using UnityEngine;
 
 public class ScenarioController : MonoBehaviour
 {
-	[SerializeField] private Scenario[] _Scenarios;
 	[SerializeField] private Recorder _Recorder;
+	[SerializeField] private TMP_Text _Title;
+	[SerializeField] private Scenario[] _Scenarios;
+
 	[SerializeField] private bool _IsRecord;
 	private int _CurrentScenario = 0;
 	
 	private void Start ()
-	{
+	{	
 		_Recorder.Record();
 		if (_IsRecord)
 		{
@@ -21,12 +24,20 @@ public class ScenarioController : MonoBehaviour
 		{
 			_Scenarios[_CurrentScenario].OnEnd += OnScenarioEnd;
 		}
-		
-		_Scenarios[_CurrentScenario].Show();
-		
+		LaunchScenario();
 
 	}
 
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space)) _Recorder.Save(_Scenarios[_CurrentScenario].Title);
+	}
+
+	private void LaunchScenario()
+	{
+		_Scenarios[_CurrentScenario].Show();
+		_Title.text = _Scenarios[_CurrentScenario].Title;
+	}
 	private void OnScenarioRecordEnd()
 	{
 		_Recorder.Save(_Scenarios[_CurrentScenario].Title);
@@ -39,8 +50,7 @@ public class ScenarioController : MonoBehaviour
 				_Recorder.Record();
 				Debug.Log(_Scenarios[_CurrentScenario].Title + " started!");
 				_Scenarios[_CurrentScenario].OnEnd += OnScenarioRecordEnd;
-				_Scenarios[_CurrentScenario].Show();
-
+				LaunchScenario();
 			}
 			else
 			{
@@ -52,6 +62,12 @@ public class ScenarioController : MonoBehaviour
 
 	private void OnScenarioEnd()
 	{
-		
+		_CurrentScenario++;
+		if (_CurrentScenario < _Scenarios.Length)
+		{
+			Debug.Log(_Scenarios[_CurrentScenario].Title + " started!");
+			_Scenarios[_CurrentScenario].OnEnd += OnScenarioEnd;
+			LaunchScenario();
+		}
 	}
 }
