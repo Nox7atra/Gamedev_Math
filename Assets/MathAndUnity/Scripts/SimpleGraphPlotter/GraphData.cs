@@ -12,6 +12,10 @@ public class GraphData : ScriptableObject
 	
 	[SerializeField] private AnimationCurve _AnimationCurve;
 
+	public AnimationCurve AnimationCurve
+	{
+		get { return _AnimationCurve; }
+	}
 	public float[] GetPoints(int count)
 	{
 		var result = new float[count];

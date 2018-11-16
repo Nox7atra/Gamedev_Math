@@ -28,10 +28,6 @@ public class ScenarioController : MonoBehaviour
 
 	}
 
-	private void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Space)) _Recorder.Save(_Scenarios[_CurrentScenario].Title);
-	}
 
 	private void LaunchScenario()
 	{

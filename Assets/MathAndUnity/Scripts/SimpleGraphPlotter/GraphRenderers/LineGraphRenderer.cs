@@ -10,6 +10,7 @@ public class LineGraphRenderer : GraphRenderer
     protected override void CreateGraph()
     {
         var go = new GameObject("Line");
+        go.layer = 5;
         go.transform.SetParent(_Graph2D.transform);
         go.transform.localPosition = Vector3.zero;
         _Line = go.AddComponent<LineRenderer>();

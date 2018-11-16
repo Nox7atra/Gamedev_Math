@@ -12,6 +12,7 @@ public class HistogramGraphRenderer : GraphRenderer
 		{
 			var point = points[i];
 			var go = GameObject.CreatePrimitive(PrimitiveType.Quad);
+			go.layer = 5;
 			go.transform.SetParent(_Graph2D.transform);
 
 			var pointPos = GetPointPosition(i, points.Length, point);
