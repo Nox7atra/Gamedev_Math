@@ -1,8 +1,5 @@
 Репозиторий к статье: https://habr.com/post/430146/
 
-Скоро CGDevs Meeetup №1
-Подробнее: https://cgdevs.com/meetup_1
-
 MIT License
 
 Copyright (c) 2018 CGDevs
